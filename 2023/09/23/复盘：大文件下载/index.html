@@ -79,13 +79,15 @@
 
 
 
-<meta name="description" content="涉猎的主要编程语言为 Python、C++">
-<meta property="og:type" content="website">
+<meta name="description" content="复盘：大文件下载业务说明​    有一套邮件系统，用户需要下载附件，附件总大小最多5G，附件数量限制最多5个，原有的解决方案是当客户点击下载单个附件时，前端会发起AJAX请求去后端，后端是PHP，然后PHP调JAVA，JAVA再去调C++，C++去数据库获取数据后把数据放在临时文件目录，接着通知JAVA，JAVA最后再返回给PHP，PHP拿到信息后，再与前端交互文件信息。 ​    上述解决方案遇">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Baron的技术空间">
-<meta property="og:url" content="https://baronblog.github.io/index.html">
+<meta property="og:url" content="https://baronblog.github.io/2023/09/23/%E5%A4%8D%E7%9B%98%EF%BC%9A%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/index.html">
 <meta property="og:site_name" content="Baron的技术空间">
-<meta property="og:description" content="涉猎的主要编程语言为 Python、C++">
+<meta property="og:description" content="复盘：大文件下载业务说明​    有一套邮件系统，用户需要下载附件，附件总大小最多5G，附件数量限制最多5个，原有的解决方案是当客户点击下载单个附件时，前端会发起AJAX请求去后端，后端是PHP，然后PHP调JAVA，JAVA再去调C++，C++去数据库获取数据后把数据放在临时文件目录，接着通知JAVA，JAVA最后再返回给PHP，PHP拿到信息后，再与前端交互文件信息。 ​    上述解决方案遇">
 <meta property="og:locale">
+<meta property="article:published_time" content="2023-09-23T06:41:21.011Z">
+<meta property="article:modified_time" content="2023-09-23T06:41:04.364Z">
 <meta property="article:author" content="Baron Yang">
 <meta property="article:tag" content="Python, C++">
 <meta name="twitter:card" content="summary">
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://baronblog.github.io/"/>
+  <link rel="canonical" href="https://baronblog.github.io/2023/09/23/复盘：大文件下载/"/>
 
 
 
 
 
-  <title>Baron的技术空间</title>
+  <title> | Baron的技术空间</title>
   
 
 
@@ -143,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -257,9 +258,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -289,9 +290,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/09/23/%E5%A4%8D%E7%9B%98%EF%BC%9A%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/" itemprop="url">未命名</a></h2>
+          <h2 class="post-title" itemprop="name headline"></h2>
         
 
         <div class="post-meta">
@@ -341,9 +340,7 @@
       
 
       
-        
-          
-            <h1 id="复盘：大文件下载"><a href="#复盘：大文件下载" class="headerlink" title="复盘：大文件下载"></a>复盘：大文件下载</h1><h3 id="业务说明"><a href="#业务说明" class="headerlink" title="业务说明"></a>业务说明</h3><p>​    有一套邮件系统，用户需要下载附件，附件总大小最多5G，附件数量限制最多5个，原有的解决方案是当客户点击下载单个附件时，前端会发起AJAX请求去后端，后端是PHP，然后PHP调JAVA，JAVA再去调C++，C++去数据库获取数据后把数据放在临时文件目录，接着通知JAVA，JAVA最后再返回给PHP，PHP拿到信息后，再与前端交互文件信息。</p>
+        <h1 id="复盘：大文件下载"><a href="#复盘：大文件下载" class="headerlink" title="复盘：大文件下载"></a>复盘：大文件下载</h1><h3 id="业务说明"><a href="#业务说明" class="headerlink" title="业务说明"></a>业务说明</h3><p>​    有一套邮件系统，用户需要下载附件，附件总大小最多5G，附件数量限制最多5个，原有的解决方案是当客户点击下载单个附件时，前端会发起AJAX请求去后端，后端是PHP，然后PHP调JAVA，JAVA再去调C++，C++去数据库获取数据后把数据放在临时文件目录，接着通知JAVA，JAVA最后再返回给PHP，PHP拿到信息后，再与前端交互文件信息。</p>
 <p>​    上述解决方案遇到的问题：</p>
 <ol>
 <li>调用关系链太长，任何一环都不能出问题，出问题下载就会失败；</li>
@@ -406,8 +403,6 @@
 </li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -424,167 +419,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://baronblog.github.io/2023/09/10/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Baron的技术空间">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2023/09/10/hello-world/" itemprop="url">Hello, Welcome to Baron World</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-09-10T17:22:45+08:00">
-                2023-09-10
-              </time>
+              <a href="/2023/09/10/hello-world/" rel="next" title="Hello, Welcome to Baron World">
+                <i class="fa fa-chevron-left"></i> Hello, Welcome to Baron World
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/helloworld/" itemprop="url" rel="index">
-                    <span itemprop="name">helloworld</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a href="https://baronblog.github.io/">Baron World</a>! This is my first post.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<h3 id="Clean-local-cache"><a href="#Clean-local-cache" class="headerlink" title="Clean local cache"></a>Clean local cache</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -594,10 +450,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -605,6 +462,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -625,8 +486,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -702,6 +572,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E7%9B%98%EF%BC%9A%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">复盘：大文件下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E8%AF%B4%E6%98%8E"><span class="nav-number">1.0.1.</span> <span class="nav-text">业务说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E6%80%9D%E8%80%83"><span class="nav-number">1.0.2.</span> <span class="nav-text">业务思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.0.3.</span> <span class="nav-text">实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.0.4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">技术总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E6%80%BB%E7%BB%93"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">业务总结</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -850,6 +736,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

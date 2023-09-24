@@ -291,7 +291,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2023/09/24/%E5%A4%8D%E7%9B%98%EF%BC%9A%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD(%E4%BA%8C)/" itemprop="url">未命名</a></h2>
+                <a class="post-title-link" href="/2023/09/24/%E5%A4%8D%E7%9B%98%EF%BC%9A%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD(%E4%BA%8C)/" itemprop="url">复盘：大文件下载(二)</a></h2>
         
 
         <div class="post-meta">
@@ -313,6 +313,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%8D%E7%9B%98/" itemprop="url" rel="index">
+                    <span itemprop="name">复盘</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -342,25 +364,14 @@
 
       
         
-          
-            <h1 id="复盘：大文件下载-二"><a href="#复盘：大文件下载-二" class="headerlink" title="复盘：大文件下载(二)"></a>复盘：大文件下载(二)</h1><h3 id="业务思考"><a href="#业务思考" class="headerlink" title="业务思考"></a>业务思考</h3><p>​        <a href="https://baronblog.github.io/2023/09/23/%E5%A4%8D%E7%9B%98%EF%BC%9A%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/">大文件下载</a>(一)是使用Nginx进行静态文件的下载，在电信光纤20M的宽带下，下载非常稳定，在我多次暂停，开始反复多次后，依然不会出现问题，那我想一起尝试下另外的几种下载方式</p>
-<ul>
-<li>flask框架自带的send_file，这个函数源码我还没有看，猜测应该与操作系统的零拷贝有关系，这里埋个坑，后面填</li>
-<li>使用生成器yield，通过流的方式下载文件</li>
-</ul>
-<h3 id="Flask-send-file下载大文件"><a href="#Flask-send-file下载大文件" class="headerlink" title="Flask send_file下载大文件"></a>Flask send_file下载大文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/get-big-file-sendfile&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_big_file_sendfile</span>():</span><br><span class="line">    <span class="keyword">return</span> send_file(<span class="string">&quot;/root/bigfilewdonload/bifile.targz&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">优点：无需任何配置，包括Nginx以及配置文件都不需要配置，只需要获取要下载的文件名即可</span></span><br><span class="line"><span class="string">缺点：下载不够稳定，下载速度波动很大，而且会在最后一点文件就卡主，使用Nginx下载就没有这种情况</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="Python生成器下载大文件"><a href="#Python生成器下载大文件" class="headerlink" title="Python生成器下载大文件"></a>Python生成器下载大文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/get-big-file-yield&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_big_file_yield</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_file</span>():</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;/root/bigfilewdonload/bifile.targz&quot;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> targetfile:</span><br><span class="line">            <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">                data = targetfile.read(<span class="number">200</span> * <span class="number">1024</span> * <span class="number">1024</span>)  <span class="comment"># 每次读取200M</span></span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">yield</span> data</span><br><span class="line"></span><br><span class="line">    response = Response(send_file(), content_type=<span class="string">&#x27;application/octet-stream&#x27;</span>)</span><br><span class="line">    response.headers[<span class="string">&quot;Content-disposition&quot;</span>] = <span class="string">&quot;attachment; filename=bifile.targz&quot;</span></span><br><span class="line">    <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">优点：不需要在Nginx配置</span></span><br><span class="line"><span class="string">缺点：需要多次测试每次读取多少M才有可能获取最快下载速度，会有超时情况发生，需要重新下载</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>​        上述两种方案，优缺点都写在了对应代码下面，最后还是建议把下载文件放在Web服务器层面，减轻业务层的压力。</p>
-
-          
+          复盘大文件下载，除了使用Web服务器进行下载外，还可以用其他方式进行下载，各有优缺点，按需选用。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2023/09/24/%E5%A4%8D%E7%9B%98%EF%BC%9A%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD(%E4%BA%8C)/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
